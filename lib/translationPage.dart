@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:translator/translator.dart';
 
 class TranslatePage extends StatefulWidget {
+  const TranslatePage({super.key});
+
   @override
   State<TranslatePage> createState() => _TranslatePage();
 }
@@ -12,10 +14,6 @@ class _TranslatePage extends State<TranslatePage> {
   TextEditingController textController = TextEditingController();
   String translatedText = '';
 
-  //creating instance of Google translator from translator package
-  // creating instance of TextEditingController to manage textfield input
-  //creating an empty string called translatedText where I put the translated text
-
   void translate() {
     String inputText = textController.text;
     translator.translate(inputText, to: "en").then((output) {
@@ -23,32 +21,25 @@ class _TranslatePage extends State<TranslatePage> {
         translatedText = output.text;
       });
 
-      //creating a function for the translation. Im creating a inputext
-      //where the user can write in the textfield and using translator to translate
-      // the input to another language
-
-      final FirebaseFirestore storedb = FirebaseFirestore.instance;
+      final FirebaseFirestore storeDB = FirebaseFirestore.instance;
       final data = <String, String>{
         "Original Text": inputText,
         "Translated Text": translatedText,
       };
-      storedb.collection("translations").add(data).then((docRef) {
-        print("Fungerar");
+      storeDB.collection("translations").add(data).then((docRef) {
+        print("Working!");
       }).catchError((error) {
-        print("Error");
+        print(error);
       });
     });
   }
 
-  //creating a instance of firestore and creating a map of data with the
-  //inputs that the user has written
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red[900],
+      //backgroundColor: Colors.red[900],
       appBar: AppBar(
-        title: const Text('English Page'),
+        title: const Text('Translate Page'),
         centerTitle: true,
         backgroundColor: Colors.grey[850],
         elevation: 0.0,
@@ -59,9 +50,9 @@ class _TranslatePage extends State<TranslatePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               Text(translatedText),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               TextFormField(
                 controller: textController,
                 textAlign: TextAlign.center,
@@ -71,12 +62,12 @@ class _TranslatePage extends State<TranslatePage> {
                     )
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: translate,
-                child: Text("Translate"),
+                child: const Text("Translate"),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
             ],
           ),

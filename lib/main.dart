@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'translationPage.dart';
@@ -10,28 +9,28 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  //initilizing firebase
+  //initializing firebase
 
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     initialRoute: '/',
     routes: {
-      '/': (context) => HomePage(),
-      '/TranslationPage': (context) => TranslatePage(),
+      '/': (context) => const HomePage(),
+      '/TranslationPage': (context) => const TranslatePage(),
     },
   ));
 }
 
-//creating routes to all my dart files
-
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      //backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Homepage'),
+        title: const Text('Homepage'),
         centerTitle: true,
       ),
       body: Column(
@@ -42,34 +41,34 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, '/TranslationPage');
               },
-              child: Text('Go to English Translation'),
+              child: const Text('Go to English Translation'),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Center(
             child: ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/SpanishPage');
               },
-              child: Text('Go to Spanish Translation'),
+              child: const Text('Go to Spanish Translation'),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Center(
             child: ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/EstonianPage');
               },
-              child: Text('Get a joke translate'),
+              child: const Text('Get a joke translate'),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Center(
             child: ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/HistoryPage');
               },
-              child: Text('Translation History'),
+              child: const Text('Translation History'),
             ),
           ),
         ],

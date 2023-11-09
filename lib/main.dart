@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'translationPage.dart';
+import 'translationPageDe.dart';
+import 'translationPageEn.dart';
+import 'translationPageFi.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -16,7 +18,9 @@ Future<void> main() async {
     initialRoute: '/',
     routes: {
       '/': (context) => const HomePage(),
-      '/TranslationPage': (context) => const TranslatePage(),
+      '/TranslationPageEn': (context) => const TranslatePageEn(),
+      '/TranslationPageDe': (context) => const TranslatePageDe(),
+      '/TranslationPageFi': (context) => const TranslatePageFi(),
     },
   ));
 }
@@ -39,7 +43,7 @@ class HomePage extends StatelessWidget {
           Center(
             child: ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/TranslationPage');
+                Navigator.pushNamed(context, '/TranslationPageEn');
               },
               child: const Text('Go to English Translation'),
             ),
@@ -48,18 +52,18 @@ class HomePage extends StatelessWidget {
           Center(
             child: ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/SpanishPage');
+                Navigator.pushNamed(context, '/TranslationPageDe');
               },
-              child: const Text('Go to Spanish Translation'),
+              child: const Text('Go to Danish Translation'),
             ),
           ),
           const SizedBox(height: 20),
           Center(
             child: ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/EstonianPage');
+                Navigator.pushNamed(context, '/TranslationPageFi');
               },
-              child: const Text('Get a joke translate'),
+              child: const Text('Go to Finish Translation'),
             ),
           ),
           const SizedBox(height: 20),

@@ -2,14 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:translator/translator.dart';
 
-class TranslatePage extends StatefulWidget {
-  const TranslatePage({super.key});
+class TranslatePageEn extends StatefulWidget {
+  const TranslatePageEn({super.key});
 
   @override
-  State<TranslatePage> createState() => _TranslatePage();
+  State<TranslatePageEn> createState() => _TranslatePageEn();
 }
 
-class _TranslatePage extends State<TranslatePage> {
+class _TranslatePageEn extends State<TranslatePageEn> {
   GoogleTranslator translator = GoogleTranslator();
   TextEditingController textController = TextEditingController();
   String translatedText = '';

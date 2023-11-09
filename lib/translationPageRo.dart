@@ -2,14 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:translator/translator.dart';
 
-class TranslatePageFi extends StatefulWidget {
-  const TranslatePageFi({super.key});
+class TranslatePageRo extends StatefulWidget {
+  const TranslatePageRo({super.key});
 
   @override
-  State<TranslatePageFi> createState() => _TranslatePageFi();
+  State<TranslatePageRo> createState() => _TranslatePageRo();
 }
 
-class _TranslatePageFi extends State<TranslatePageFi> {
+class _TranslatePageRo extends State<TranslatePageRo> {
   // Initialize the Google Translator and TextEditingController.
   GoogleTranslator translator = GoogleTranslator();
   TextEditingController textController = TextEditingController();
@@ -19,8 +19,8 @@ class _TranslatePageFi extends State<TranslatePageFi> {
   void translate() {
     String inputText = textController.text;
 
-    // Use the translator library to translate the input text to Finish ("fi").
-    translator.translate(inputText, to: "fi").then((output) {
+    // Use the translator library to translate the input text to Romanian ("ro").
+    translator.translate(inputText, to: "ro").then((output) {
       setState(() {
         translatedText = output.text;
       });

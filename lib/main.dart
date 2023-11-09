@@ -3,16 +3,18 @@ import 'package:flutter/material.dart';
 import 'translationPageDe.dart';
 import 'translationPageEn.dart';
 import 'translationPageFi.dart';
+import 'translationPageRo.dart';
 import 'firebase_options.dart';
 
+// This is the main entry point of the Flutter application.
 Future<void> main() async {
+  // Ensure that Flutter is initialized and Firebase services are ready.
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  //initializing firebase
-
+  // Initialize the Flutter app and define routes for different pages.
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     initialRoute: '/',
@@ -21,10 +23,12 @@ Future<void> main() async {
       '/TranslationPageEn': (context) => const TranslatePageEn(),
       '/TranslationPageDe': (context) => const TranslatePageDe(),
       '/TranslationPageFi': (context) => const TranslatePageFi(),
+      '/TranslationPageRo': (context) => const TranslatePageRo(),
     },
   ));
 }
 
+// This is the homepage of the app.
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -40,6 +44,7 @@ class HomePage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          // Button to navigate to the English translation page.
           Center(
             child: ElevatedButton(
               onPressed: () {
@@ -49,6 +54,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
+          // Button to navigate to the Danish translation page.
           Center(
             child: ElevatedButton(
               onPressed: () {
@@ -58,6 +64,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
+          // Button to navigate to the Finnish translation page.
           Center(
             child: ElevatedButton(
               onPressed: () {
@@ -67,12 +74,13 @@ class HomePage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
+          // Button to navigate to the Romanian translation page.
           Center(
             child: ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/HistoryPage');
+                Navigator.pushNamed(context, '/TranslationPageRo');
               },
-              child: const Text('Translation History'),
+              child: const Text('Go to Rumanian Translation'),
             ),
           ),
         ],

@@ -10,22 +10,31 @@ class TranslatePageEn extends StatefulWidget {
 }
 
 class _TranslatePageEn extends State<TranslatePageEn> {
+  // Initialize the Google Translator and TextEditingController.
   GoogleTranslator translator = GoogleTranslator();
   TextEditingController textController = TextEditingController();
   String translatedText = '';
 
+  // Function to perform text translation and save the translation to Firebase Firestore.
   void translate() {
     String inputText = textController.text;
+
+    // Use the translator library to translate the input text to English ("en").
     translator.translate(inputText, to: "en").then((output) {
       setState(() {
         translatedText = output.text;
       });
 
+      // Access the Firebase Firestore instance.
       final FirebaseFirestore storeDB = FirebaseFirestore.instance;
+
+      // Create a data map to store the original and translated text.
       final data = <String, String>{
         "Original Text": inputText,
         "Translated Text": translatedText,
       };
+
+      // Add the data to a "translations" collection in Firebase Firestore.
       storeDB.collection("translations").add(data).then((docRef) {
         print("Working!");
       }).catchError((error) {
@@ -51,24 +60,23 @@ class _TranslatePageEn extends State<TranslatePageEn> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const SizedBox(height: 40),
-              Text(translatedText),
+              Text(translatedText), // Display the translated text.
               const SizedBox(height: 30),
               TextFormField(
                 controller: textController,
                 textAlign: TextAlign.center,
                 decoration: const InputDecoration(
                     label: Center(
-                      child: Text('Börja skriva för att översätta'),
-                    )
-                ),
+                  child: Text('Börja skriva för att översätta'),
+                )),
               ),
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: translate,
+                // Trigger the translation when the button is pressed.
                 child: const Text("Translate"),
               ),
               const SizedBox(height: 20),
-
             ],
           ),
         ),

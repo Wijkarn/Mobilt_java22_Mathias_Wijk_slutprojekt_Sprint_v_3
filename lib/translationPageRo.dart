@@ -1,6 +1,18 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'package:translator/translator.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: TranslatePageRo(),
+    );
+  }
+}
 
 class TranslatePageRo extends StatefulWidget {
   const TranslatePageRo({super.key});
@@ -10,45 +22,47 @@ class TranslatePageRo extends StatefulWidget {
 }
 
 class _TranslatePageRo extends State<TranslatePageRo> {
-  // Initialize the Google Translator and TextEditingController.
   GoogleTranslator translator = GoogleTranslator();
-  TextEditingController textController = TextEditingController();
   String translatedText = '';
+  bool isLoading = false;
 
-  // Function to perform text translation and save the translation to Firebase Firestore.
-  void translate() {
-    String inputText = textController.text;
+  Future<Map<String, dynamic>> fetchChuckNorrisJoke() async {
+    final response = await http.get(Uri.parse('https://api.chucknorris.io/jokes/random'));
 
-    // Use the translator library to translate the input text to Romanian ("ro").
-    translator.translate(inputText, to: "ro").then((output) {
-      setState(() {
-        translatedText = output.text;
-      });
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      throw Exception('Failed to load Chuck Norris joke');
+    }
+  }
 
-      // Access the Firebase Firestore instance.
-      final FirebaseFirestore storeDB = FirebaseFirestore.instance;
-
-      // Create a data map to store the original and translated text.
-      final data = <String, String>{
-        "Original Text": inputText,
-        "Translated Text": translatedText,
-      };
-
-      // Add the data to a "translations" collection in Firebase Firestore.
-      storeDB.collection("translations").add(data).then((docRef) {
-        print("Working!");
-      }).catchError((error) {
-        print(error);
-      });
+  void translateChuckNorrisJoke() async {
+    setState(() {
+      isLoading = true;
     });
+
+    try {
+      Map<String, dynamic> jokeData = await fetchChuckNorrisJoke();
+      String jokeText = jokeData['value'] as String;
+
+      translator.translate(jokeText, to: "sv").then((output) {
+        setState(() {
+          translatedText = output.text;
+          isLoading = false;
+        });
+      });
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: Colors.red[900],
       appBar: AppBar(
-        title: const Text('Translate Page'),
+        title: const Text('Chuck Norris Joke Translator'),
         centerTitle: true,
         backgroundColor: Colors.grey[850],
         elevation: 0.0,
@@ -60,21 +74,13 @@ class _TranslatePageRo extends State<TranslatePageRo> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const SizedBox(height: 40),
-              Text(translatedText), // Display the translated text.
+              isLoading
+                  ? CircularProgressIndicator() // Display a loading indicator while fetching and translating.
+                  : Text(translatedText), // Display the translated joke.
               const SizedBox(height: 30),
-              TextFormField(
-                controller: textController,
-                textAlign: TextAlign.center,
-                decoration: const InputDecoration(
-                    label: Center(
-                  child: Text('Börja skriva för att översätta'),
-                )),
-              ),
-              const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: translate,
-                // Trigger the translation when the button is pressed.
-                child: const Text("Translate"),
+                onPressed: translateChuckNorrisJoke,
+                child: const Text("Translate Chuck Norris Joke To Swedish"),
               ),
               const SizedBox(height: 20),
             ],

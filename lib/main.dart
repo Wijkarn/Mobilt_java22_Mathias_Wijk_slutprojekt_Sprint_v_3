@@ -36,7 +36,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('Homepage'),
         centerTitle: true,
@@ -80,7 +79,7 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, '/TranslationPageRo');
               },
-              child: const Text('Go to Rumanian Translation'),
+              child: const Text('Translate Chuck Norris joke to Swedish'),
             ),
           ),
         ],

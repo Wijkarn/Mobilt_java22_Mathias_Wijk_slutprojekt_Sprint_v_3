@@ -9,19 +9,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: TranslatePageRo(),
+      home: TranslateChuckNorris(),
     );
   }
 }
 
-class TranslatePageRo extends StatefulWidget {
-  const TranslatePageRo({super.key});
+class TranslateChuckNorris extends StatefulWidget {
+  const TranslateChuckNorris({super.key});
 
   @override
-  State<TranslatePageRo> createState() => _TranslatePageRo();
+  State<TranslateChuckNorris> createState() => _TranslatePageChuckNorris();
 }
 
-class _TranslatePageRo extends State<TranslatePageRo> {
+class _TranslatePageChuckNorris extends State<TranslateChuckNorris> {
   GoogleTranslator translator = GoogleTranslator();
   String translatedText = '';
   bool isLoading = false;

@@ -1,16 +1,2 @@
-# slut
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Sprint V.3 Slutprojekt Mathias Wijk
+My project is a Flutter mobile app that enables text translation to different languages and stores both the original and translated text in Firebase Firestore. It includes multiple pages for translating text to specific languages, such as English, Danish, Finnish and Swedish. The app's components consist of a homepage for language selection, individual translation pages with input fields and translation buttons, translation logic using the `translator` library, integration with Firebase Firestore for data storage, and a user interface created with Flutter widgets like `Scaffold`, `AppBar`, `TextFormField`, and `ElevatedButton`.

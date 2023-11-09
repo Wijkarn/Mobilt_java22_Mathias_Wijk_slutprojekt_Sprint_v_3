@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'translationPageDe.dart';
 import 'translationPageEn.dart';
 import 'translationPageFi.dart';
-import 'translationPageRo.dart';
+import 'translationPageChuckNorris.dart';
 import 'firebase_options.dart';
 
 // This is the main entry point of the Flutter application.
@@ -23,7 +23,7 @@ Future<void> main() async {
       '/TranslationPageEn': (context) => const TranslatePageEn(),
       '/TranslationPageDe': (context) => const TranslatePageDe(),
       '/TranslationPageFi': (context) => const TranslatePageFi(),
-      '/TranslationPageRo': (context) => const TranslatePageRo(),
+      '/TranslateChuckNorris': (context) => const TranslateChuckNorris(),
     },
   ));
 }
@@ -77,7 +77,7 @@ class HomePage extends StatelessWidget {
           Center(
             child: ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/TranslationPageRo');
+                Navigator.pushNamed(context, '/TranslateChuckNorris');
               },
               child: const Text('Translate Chuck Norris joke to Swedish'),
             ),
